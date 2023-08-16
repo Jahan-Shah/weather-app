@@ -1,7 +1,9 @@
-const request = require("request");
+const forecast = require("./utils/forecast");
 
-const API_KEY = "7caedf1b3939ea5fdc12596eef526423";
+const address = process.argv[2];
 
-const URL = `http://api.weatherstack.com/current?access_key=${API_KEY}&query=Faisalabad`;
-
-request({ URL }, () => {});
+if (!address) console.log("Please enter address/valid address");
+else
+  forecast(address, (error, { location, status }) => {
+    error ? console.log("Error", error) : console.log(location + "\n" + status);
+  });
